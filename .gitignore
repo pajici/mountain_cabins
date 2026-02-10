@@ -399,3 +399,17 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+
+# Node modules
+node_modules/
+
+# Angular build cache
+.angular/cache/
+
+# Build output
+dist/
+out-tsc/
+
+# Logs
+*.log
