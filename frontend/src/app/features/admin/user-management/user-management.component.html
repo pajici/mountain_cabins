@@ -1,0 +1,106 @@
+<div class="user-management-container">
+  <div class="header">
+    <h1>Upravljanje Korisnicima</h1>
+  </div>
+
+  <div class="filters">
+    <mat-form-field appearance="outline">
+      <mat-label>Pretraga</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Korisničko ime, ime ili email...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Uloga</mat-label>
+      <mat-select [formControl]="roleControl">
+        <mat-option value="">Sve uloge</mat-option>
+        <mat-option value="ADMIN">Administrator</mat-option>
+        <mat-option value="OWNER">Vlasnik</mat-option>
+        <mat-option value="TOURIST">Turista</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select [formControl]="statusControl">
+        <mat-option value="">Svi</mat-option>
+        <mat-option value="true">Aktivan</mat-option>
+        <mat-option value="false">Neaktivan</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Tabela korisnika -->
+  <div class="table-container" *ngIf="paginatedUsers.length > 0; else noUsers">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="users-table">
+
+      <!-- Korisničko ime Column -->
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Korisničko ime</th>
+        <td mat-cell *matCellDef="let user">{{ user.username }}</td>
+      </ng-container>
+
+      <!-- Ime i prezime Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime i prezime</th>
+        <td mat-cell *matCellDef="let user">{{ user.firstName }} {{ user.lastName }}</td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+      </ng-container>
+
+      <!-- Uloga Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Uloga</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-chip [color]="getRoleColor(user.role)" selected>
+            {{ getRoleText(user.role) }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let user">
+          <mat-chip [color]="user.active ? 'primary' : 'warn'" selected>
+            {{ user.active ? 'Aktivan' : 'Neaktivan' }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <!-- Akcije Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Akcije</th>
+        <td mat-cell *matCellDef="let user">
+          <button mat-icon-button (click)="editUser(user)" title="Izmeni">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="toggleUserStatus(user)" title="Aktiviraj/Deaktiviraj">
+            <mat-icon>{{ user.active ? 'block' : 'check_circle' }}</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator
+      [length]="filteredUsers.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPageChange($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+
+  <ng-template #noUsers>
+    <div class="no-users">
+      <mat-icon class="no-users-icon">people</mat-icon>
+      <h2>Nema korisnika</h2>
+      <p>Nisu pronađeni korisnici koji odgovaraju filterima.</p>
+    </div>
+  </ng-template>
+</div>

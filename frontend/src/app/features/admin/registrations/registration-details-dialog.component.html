@@ -1,0 +1,65 @@
+<div class="registration-details-dialog">
+  <h2 mat-dialog-title>Detalji Registracije</h2>
+
+  <mat-dialog-content>
+    <div class="details-grid">
+      <mat-card class="detail-card">
+        <mat-card-header>
+          <mat-card-title>Lični podaci</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-row">
+            <strong>Ime:</strong> {{ data.firstName }}
+          </div>
+          <div class="info-row">
+            <strong>Prezime:</strong> {{ data.lastName }}
+          </div>
+          <div class="info-row">
+            <strong>Email:</strong> {{ data.email }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="detail-card">
+        <mat-card-header>
+          <mat-card-title>Informacije o nalogu</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-row">
+            <strong>Tip naloga:</strong>
+            <mat-chip [color]="getRoleColor(data.role)" selected>
+              {{ getRoleText(data.role) }}
+            </mat-chip>
+          </div>
+          <div class="info-row">
+            <strong>Status:</strong>
+            <mat-chip [color]="getStatusColor(data.status)" selected>
+              {{ getStatusText(data.status) }}
+            </mat-chip>
+          </div>
+          <div class="info-row">
+            <strong>Datum zahteva:</strong> {{ data.createdAt | date:'dd.MM.yyyy. HH:mm' }}
+          </div>
+          <div class="info-row" *ngIf="data.rejectionReason">
+            <strong>Razlog odbijanja:</strong> {{ data.rejectionReason }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+      <fa-icon [icon]="faTimes"></fa-icon>
+      Zatvori
+    </button>
+    <button mat-raised-button color="primary" (click)="approve()" *ngIf="data.status === 'PENDING'">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+      Odobri
+    </button>
+    <button mat-raised-button color="warn" (click)="reject()" *ngIf="data.status === 'PENDING'">
+      <fa-icon [icon]="faTimes"></fa-icon>
+      Odbij
+    </button>
+  </mat-dialog-actions>
+</div>

@@ -1,0 +1,45 @@
+<div class="cabin-detail" *ngIf="cabinData">
+  <h1>{{ cabinData.cabin.name }}</h1>
+  <div class="rating" *ngIf="isLoggedIn">
+    <p>Prosečna ocena: {{ cabinData.averageRating | number:'1.1-1' }} ★</p>
+  </div>
+  <div class="details-grid">
+    <div class="detail-card card">
+      <h3>Informacije</h3>
+      <p><strong>Mesto:</strong> {{ cabinData.cabin.place }}</p>
+      <p><strong>Usluge:</strong> {{ cabinData.cabin.servicesText }}</p>
+      <p><strong>Telefon:</strong> {{ cabinData.cabin.phone }}</p>
+      <p><strong>Cena leto:</strong> {{ cabinData.cabin.priceSummerRsd }} RSD/noć</p>
+      <p><strong>Cena zima:</strong> {{ cabinData.cabin.priceWinterRsd }} RSD/noć</p>
+    </div>
+    <div class="detail-card card" *ngIf="isLoggedIn && userRole === 'TOURIST'">
+      <h3>Akcije</h3>
+      <button mat-raised-button color="primary" (click)="bookCabin()">
+        Rezerviši vikendicu
+      </button>
+    </div>
+    <div class="detail-card card" *ngIf="isLoggedIn">
+      <h3>Recenzije ({{ cabinData.reviews.length }})</h3>
+      <div *ngFor="let review of cabinData.reviews" class="review">
+        <p>Ocena: {{ review.rating }}/5 ★</p>
+        <p>{{ review.comment }}</p>
+        <p><small>{{ review.createdAt | date:'dd.MM.yyyy' }}</small></p>
+      </div>
+      <p *ngIf="cabinData.reviews.length === 0">Nema recenzija.</p>
+    </div>
+  </div>
+  <div class="images">
+    <app-cabin-gallery
+      [images]="cabinData.images"
+      [cabinName]="cabinData.cabin.name"
+      (imageClick)="openImageGallery($event)">
+    </app-cabin-gallery>
+  </div>
+  <div class="map" *ngIf="cabinData.cabin.lat && cabinData.cabin.lng">
+    <app-map
+      [latitude]="cabinData.cabin.lat"
+      [longitude]="cabinData.cabin.lng"
+      [markerTitle]="cabinData.cabin.name">
+    </app-map>
+  </div>
+</div>

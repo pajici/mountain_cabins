@@ -1,0 +1,113 @@
+<div class="edit-user-dialog">
+  <h2 mat-dialog-title>{{ isNewUser ? 'Dodaj novog korisnika' : 'Izmeni korisnika' }}</h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="userForm" class="user-form">
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Korisničko ime</mat-label>
+          <input matInput formControlName="username" placeholder="Unesite korisničko ime">
+          <mat-error *ngIf="userForm.get('username')?.hasError('required')">
+            Korisničko ime je obavezno
+          </mat-error>
+          <mat-error *ngIf="userForm.get('username')?.hasError('minlength')">
+            Korisničko ime mora imati najmanje 3 karaktera
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Unesite e-mail adresu">
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+            E-mail je obavezan
+          </mat-error>
+          <mat-error *ngIf="userForm.get('email')?.hasError('email')">
+            Unesite validnu e-mail adresu
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Ime</mat-label>
+          <input matInput formControlName="firstName" placeholder="Unesite ime">
+          <mat-error *ngIf="userForm.get('firstName')?.hasError('required')">
+            Ime je obavezno
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Prezime</mat-label>
+          <input matInput formControlName="lastName" placeholder="Unesite prezime">
+          <mat-error *ngIf="userForm.get('lastName')?.hasError('required')">
+            Prezime je obavezno
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Uloga</mat-label>
+          <mat-select formControlName="role">
+            <mat-option value="TOURIST">Turista</mat-option>
+            <mat-option value="OWNER">Vlasnik</mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.get('role')?.hasError('required')">
+            Uloga je obavezna
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="isNewUser">
+          <mat-label>Lozinka</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Unesite lozinku">
+          <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+            Lozinka je obavezna
+          </mat-error>
+          <mat-error *ngIf="userForm.get('password')?.hasError('minlength')">
+            Lozinka mora imati najmanje 6 karaktera
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Telefon</mat-label>
+          <input matInput formControlName="phone" placeholder="Unesite broj telefona">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Adresa</mat-label>
+          <input matInput formControlName="address" placeholder="Unesite adresu">
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Pol</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="">Nije naveden</mat-option>
+            <mat-option value="MALE">Muški</mat-option>
+            <mat-option value="FEMALE">Ženski</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="checkbox-row">
+        <mat-checkbox formControlName="active">
+          Korisnik je aktivan
+        </mat-checkbox>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+      Otkaži
+    </button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="userForm.invalid">
+      <mat-icon>{{ isNewUser ? 'add' : 'save' }}</mat-icon>
+      {{ isNewUser ? 'Dodaj' : 'Sačuvaj' }}
+    </button>
+  </mat-dialog-actions>
+</div>

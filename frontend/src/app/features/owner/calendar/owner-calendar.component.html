@@ -1,0 +1,38 @@
+<div class="calendar-container">
+  <div class="header">
+    <h1>Kalendar Rezervacija</h1>
+    <div class="header-actions">
+      <div class="filters">
+        <mat-form-field appearance="outline">
+          <mat-label>Vikendica</mat-label>
+          <mat-select [formControl]="cabinControl">
+            <mat-option value="">Sve vikendice</mat-option>
+            <mat-option *ngFor="let cabin of cabins" [value]="cabin.id">
+              {{ cabin.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="calendar-wrapper">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
+
+  <!-- Legenda -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-color confirmed"></div>
+      <span>Potvrđena rezervacija</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color pending"></div>
+      <span>Na čekanju</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color cancelled"></div>
+      <span>Otkazana</span>
+    </div>
+  </div>
+</div>

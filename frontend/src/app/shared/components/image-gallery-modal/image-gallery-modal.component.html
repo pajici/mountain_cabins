@@ -1,0 +1,54 @@
+<div class="gallery-modal">
+  <div class="modal-header">
+    <h2>{{ cabinName }}</h2>
+    <button mat-icon-button (click)="close()" class="close-button">
+      <fa-icon [icon]="faTimes"></fa-icon>
+    </button>
+  </div>
+
+  <div class="modal-content">
+    <div class="main-image-container">
+      <button mat-icon-button
+              (click)="previousImage()"
+              [disabled]="currentIndex === 0"
+              class="nav-button nav-left">
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
+      </button>
+
+      <div class="main-image-wrapper">
+        <img [src]="getCurrentImageUrl()"
+             [alt]="cabinName + ' - slika ' + (currentIndex + 1)"
+             class="main-image"
+             (load)="onImageLoad($event)"
+             (error)="onImageError($event)">
+        <div class="image-loading" *ngIf="isLoading">
+          <fa-icon [icon]="faHourglass"></fa-icon>
+        </div>
+      </div>
+
+      <button mat-icon-button
+              (click)="nextImage()"
+              [disabled]="currentIndex === images.length - 1"
+              class="nav-button nav-right">
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </button>
+    </div>
+
+    <div class="image-counter">
+      {{ currentIndex + 1 }} / {{ images.length }}
+    </div>
+
+    <div class="thumbnail-strip" *ngIf="images.length > 1">
+      <div class="thumbnail-scroll">
+        <div class="thumbnail"
+             *ngFor="let image of images; let i = index"
+             [class.active]="i === currentIndex"
+             (click)="setCurrentImage(i)">
+          <img [src]="getImageUrl(image)"
+               [alt]="cabinName + ' thumbnail ' + (i + 1)"
+               (error)="onThumbnailError($event)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="cabins-container">
+  <div class="content-section">
+    <div class="stats">
+      <div class="stat-item card">
+        <h3>Ukupno vikendica</h3>
+        <p class="stat-number">{{ totalCabins }}</p>
+      </div>
+      <div class="stat-item card">
+        <h3>Registrovani vlasnici</h3>
+        <p class="stat-number">{{ totalOwners }}</p>
+      </div>
+      <div class="stat-item card">
+        <h3>Registrovani turisti</h3>
+        <p class="stat-number">{{ totalTourists }}</p>
+      </div>
+      <div class="stat-item card">
+        <h3>Rezervacije (24h)</h3>
+        <p class="stat-number">{{ stats.confirmedReservations24h }}</p>
+      </div>
+      <div class="stat-item card">
+        <h3>Rezervacije (7d)</h3>
+        <p class="stat-number">{{ stats.confirmedReservations7d }}</p>
+      </div>
+      <div class="stat-item card">
+        <h3>Rezervacije (30d)</h3>
+        <p class="stat-number">{{ stats.confirmedReservations30d }}</p>
+      </div>
+    </div>
+
+    <h1>Planinske Vikendice</h1>
+
+    <div class="filters">
+      <div class="search-bar">
+        <input type="text" placeholder="Pretraga po nazivu ili mestu..." (input)="onSearch($event)" />
+      </div>
+      <div class="sort-bar">
+        <select (change)="onSort($event)">
+          <option value="">Sortiraj po</option>
+          <option value="name_asc">Naziv (A-Z)</option>
+          <option value="name_desc">Naziv (Z-A)</option>
+          <option value="place_asc">Mesto (A-Z)</option>
+          <option value="place_desc">Mesto (Z-A)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cabins-grid">
+      <div *ngFor="let item of cabins" class="cabin-card card">
+        <div class="cabin-image">
+          <img [src]="getCabinImage(item.thumbnail)" [alt]="item.cabin.name" />
+        </div>
+        <div class="cabin-info">
+          <h3>{{ item.cabin.name }}</h3>
+          <p class="location">{{ item.cabin.place }}</p>
+          <div class="pricing">
+            <p>Leto: {{ item.cabin.priceSummerRsd | number }} RSD/noć</p>
+            <p>Zima: {{ item.cabin.priceWinterRsd | number }} RSD/noć</p>
+          </div>
+          <div class="rating" *ngIf="authService.isLoggedIn()">
+            <span class="stars">
+              <span *ngFor="let star of getStars(item.averageRating)" [class.filled]="star.filled" [class.half]="star.half">★</span>
+            </span>
+            <span class="rating-number">{{ item.averageRating | number:'1.1-1' }} / 5.0</span>
+          </div>
+          <a [routerLink]="['/cabins', item.cabin.id]" class="btn btn-primary">Detalji</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="load-more" *ngIf="hasMore">
+      <button class="btn btn-secondary" (click)="loadMore()">Učitaj više</button>
+    </div>
+  </div>
+</div>

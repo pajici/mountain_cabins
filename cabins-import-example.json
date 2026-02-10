@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Brvnara na vodi",
+    "place": "Badovinci",
+    "capacity": 6,
+    "priceSummerRsd": 12000,
+    "priceWinterRsd": 15000,
+    "servicesText": "WiFi, Parking, Grejanje, Klima uređaj, Terasa, Roštilj",
+    "description": "Tradicionalna brvnara smeštena pored vode u mirnom selu Badovinci. Idealno mesto za opuštanje u prirodi.",
+    "phone": "+381 64 123 4567",
+    "lat": 44.1234,
+    "lng": 19.5678
+  }
+]

@@ -1,0 +1,47 @@
+.registration-details-dialog {
+  min-width: 600px;
+  max-width: 800px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detail-card {
+  height: fit-content;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--mat-sys-outline-variant);
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  strong {
+    color: var(--mat-sys-primary);
+    min-width: 120px;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .registration-details-dialog {
+    min-width: 90vw;
+    max-width: 90vw;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}

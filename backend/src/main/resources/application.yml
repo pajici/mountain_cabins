@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 60m
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/planinska_vikendica?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 12MB
+
+cors:
+  allowed-origins: http://localhost:4200

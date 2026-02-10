@@ -1,0 +1,86 @@
+<div class="profile-container">
+  <h1>Moj Profil (Administrator)</h1>
+
+  <div class="profile-content grid grid-2">
+    <!-- Profile Picture Section -->
+    <mat-card class="profile-picture-card">
+      <mat-card-header>
+        <mat-card-title>Profilna Slika</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="profile-picture">
+          <img [src]="getProfileImage()" alt="Profile Picture" class="profile-avatar" />
+        </div>
+        <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" style="display: none;" />
+        <button mat-raised-button color="primary" (click)="fileInput.click()">
+          <fa-icon [icon]="faCamera"></fa-icon>
+          Promeni Sliku
+        </button>
+        <p *ngIf="selectedFile" style="margin-top: 10px;">Izabrana datoteka: {{ selectedFile.name }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Profile Data Section -->
+    <mat-card class="profile-data-card">
+      <mat-card-header>
+        <mat-card-title>Lični Podaci</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Korisničko Ime</mat-label>
+              <input matInput formControlName="username" readonly>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Ime</mat-label>
+              <input matInput formControlName="firstName" required>
+              <mat-error *ngIf="profileForm.get('firstName')?.hasError('required')">Ime je obavezno</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Prezime</mat-label>
+              <input matInput formControlName="lastName" required>
+              <mat-error *ngIf="profileForm.get('lastName')?.hasError('required')">Prezime je obavezno</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Kontakt Telefon</mat-label>
+              <input matInput formControlName="phone" required>
+              <mat-error *ngIf="profileForm.get('phone')?.hasError('required')">Telefon je obavezan</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Adresa</mat-label>
+              <input matInput formControlName="address" required>
+              <mat-error *ngIf="profileForm.get('address')?.hasError('required')">Adresa je obavezna</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email" type="email" required readonly>
+              <mat-error *ngIf="profileForm.get('email')?.hasError('required')">E-mail je obavezan</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-actions">
+            <button mat-button type="button" (click)="resetForm()">
+              <fa-icon [icon]="faSync"></fa-icon>
+              Poništi
+            </button>
+            <button mat-button type="button" (click)="changePassword()">
+              <fa-icon [icon]="faLock"></fa-icon>
+              Promeni lozinku
+            </button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!profileForm.valid || (!profileForm.dirty && !selectedFile)">
+              <fa-icon [icon]="faSave"></fa-icon>
+              Sačuvaj Izmene
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

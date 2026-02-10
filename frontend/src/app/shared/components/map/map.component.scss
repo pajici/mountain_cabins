@@ -1,0 +1,26 @@
+.map-container {
+  width: 100%;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.map-element {
+  width: 100%;
+  height: 100%;
+}
+
+/* Leaflet custom styles */
+:host ::ng-deep .leaflet-control-container {
+  font-family: inherit;
+}
+
+:host ::ng-deep .leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+:host ::ng-deep .leaflet-popup-tip {
+  background-color: white;
+}

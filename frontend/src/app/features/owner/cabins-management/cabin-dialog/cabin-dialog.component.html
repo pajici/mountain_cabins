@@ -1,0 +1,179 @@
+<div class="cabin-dialog">
+  <h2 mat-dialog-title>
+    <fa-icon [icon]="isEdit ? faSave : faPlus"></fa-icon>
+    {{ isEdit ? 'Izmeni vikendicu' : 'Dodaj novu vikendicu' }}
+  </h2>
+
+  <mat-dialog-content>
+    <form [formGroup]="cabinForm" class="cabin-form">
+      <!-- Osnovne informacije -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon>home</mat-icon>
+          Osnovne informacije
+        </h3>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Naziv vikendice *</mat-label>
+          <input matInput formControlName="name" placeholder="npr. Vila Sunce, Kućica na jezeru...">
+          <mat-icon matPrefix>badge</mat-icon>
+          <mat-error *ngIf="cabinForm.get('name')?.hasError('required')">
+            Naziv vikendice je obavezan
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mesto *</mat-label>
+          <input matInput formControlName="location" placeholder="npr. Zlatibor, Kopaonik, Tara...">
+          <mat-icon matPrefix>location_on</mat-icon>
+          <mat-error *ngIf="cabinForm.get('location')?.hasError('required')">
+            Mesto je obavezno
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Kapacitet (broj osoba) *</mat-label>
+          <input matInput type="number" formControlName="capacity" min="1" placeholder="npr. 4, 6, 8...">
+          <mat-icon matPrefix>people</mat-icon>
+          <mat-error *ngIf="cabinForm.get('capacity')?.hasError('required')">
+            Kapacitet je obavezan
+          </mat-error>
+          <mat-error *ngIf="cabinForm.get('capacity')?.hasError('min')">
+            Kapacitet mora biti najmanje 1 osoba
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Usluge i opis -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon>info</mat-icon>
+          Opis i usluge
+        </h3>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usluge</mat-label>
+          <textarea matInput formControlName="services" rows="3"
+                    placeholder="Unesite usluge koje vikendica nudi: WiFi, parking, bazen, roštilj, sauna..."></textarea>
+          <mat-icon matPrefix>room_service</mat-icon>
+          <mat-hint>Odvojite usluge zarezom</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Detaljan opis vikendice</mat-label>
+          <textarea matInput formControlName="description" rows="4"
+                    placeholder="Opišite vikendicu: ambijent, pogled, uređenje, okruženje..."></textarea>
+          <mat-icon matPrefix>description</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Cenovnik -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon>payments</mat-icon>
+          Cenovnik noćenja (RSD po noći)
+        </h3>
+
+        <div class="price-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Letnja cena (maj-avgust) *</mat-label>
+            <input matInput type="number" formControlName="summerPrice" min="0" placeholder="0">
+            <mat-icon matPrefix>wb_sunny</mat-icon>
+            <span matTextSuffix>RSD</span>
+            <mat-error *ngIf="cabinForm.get('summerPrice')?.hasError('required')">
+              Cena je obavezna
+            </mat-error>
+            <mat-error *ngIf="cabinForm.get('summerPrice')?.hasError('min')">
+              Cena mora biti pozitivna
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Zimska cena (ostalo) *</mat-label>
+            <input matInput type="number" formControlName="winterPrice" min="0" placeholder="0">
+            <mat-icon matPrefix>ac_unit</mat-icon>
+            <span matTextSuffix>RSD</span>
+            <mat-error *ngIf="cabinForm.get('winterPrice')?.hasError('required')">
+              Cena je obavezna
+            </mat-error>
+            <mat-error *ngIf="cabinForm.get('winterPrice')?.hasError('min')">
+              Cena mora biti pozitivna
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Kontakt i koordinate -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon>contact_phone</mat-icon>
+          Kontakt i lokacija na mapi
+        </h3>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Telefon</mat-label>
+          <input matInput formControlName="phone" placeholder="+381 XX XXX XXXX">
+          <mat-icon matPrefix>phone</mat-icon>
+          <mat-hint>Format: +381 XX XXX XXXX</mat-hint>
+        </mat-form-field>
+
+        <div class="coordinates-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Geografska širina (Latitude)</mat-label>
+            <input matInput type="number" step="0.000001" formControlName="latitude" placeholder="43.850000">
+            <mat-icon matPrefix>location_searching</mat-icon>
+            <mat-hint>Za prikaz na mapi</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Geografska dužina (Longitude)</mat-label>
+            <input matInput type="number" step="0.000001" formControlName="longitude" placeholder="19.850000">
+            <mat-icon matPrefix>location_searching</mat-icon>
+            <mat-hint>Za prikaz na mapi</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Slike -->
+      <div class="form-section">
+        <h3 class="section-title">
+          <mat-icon>photo_library</mat-icon>
+          Fotografije vikendice
+        </h3>
+
+        <div class="image-upload">
+          <input type="file" #imageInput accept="image/*" multiple style="display: none" (change)="onImagesSelected($event)">
+          <button mat-raised-button color="accent" type="button" (click)="imageInput.click()">
+            <fa-icon [icon]="faImages"></fa-icon>
+            Izaberite fotografije
+          </button>
+          <mat-hint>Možete izabrati više slika odjednom</mat-hint>
+          
+          <div class="selected-images" *ngIf="selectedImages.length > 0">
+            <div class="images-count">
+              <mat-icon>check_circle</mat-icon>
+              <span>Izabrano slika: {{ selectedImages.length }}</span>
+            </div>
+            <ul class="image-list">
+              <li *ngFor="let image of selectedImages">
+                <mat-icon>image</mat-icon>
+                {{ image.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">
+      <mat-icon>close</mat-icon>
+      Otkaži
+    </button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="cabinForm.invalid" type="button">
+      <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
+      {{ isEdit ? 'Sačuvaj izmene' : 'Dodaj vikendicu' }}
+    </button>
+  </mat-dialog-actions>
+</div>

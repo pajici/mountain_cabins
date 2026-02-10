@@ -1,0 +1,90 @@
+<div class="reservation-dialog">
+  <h2 mat-dialog-title>Detalji Rezervacije</h2>
+
+  <mat-dialog-content>
+    <mat-card class="reservation-card">
+      <mat-card-content>
+        <div class="reservation-info">
+          <div class="info-row">
+            <strong>Vikendica:</strong> {{ data.reservation.cabinName }}
+          </div>
+          <div class="info-row">
+            <strong>Turista:</strong> {{ data.reservation.touristName }}
+          </div>
+          <div class="info-row">
+            <strong>Datum dolaska:</strong> {{ data.reservation.startDate | date:'dd.MM.yyyy.' }}
+          </div>
+          <div class="info-row">
+            <strong>Datum odlaska:</strong> {{ data.reservation.endDate | date:'dd.MM.yyyy.' }}
+          </div>
+          <div class="info-row">
+            <strong>Broj noćenja:</strong> {{ getNightsCount() }}
+          </div>
+          <div class="info-row">
+            <strong>Broj odraslih:</strong> {{ data.reservation.adults }}
+          </div>
+          <div class="info-row">
+            <strong>Broj dece:</strong> {{ data.reservation.children }}
+          </div>
+          <div class="info-row">
+            <strong>Ukupna cena:</strong> {{ data.reservation.totalPriceRsd | number:'1.2-2' }} RSD
+          </div>
+          <div class="info-row">
+            <strong>Status:</strong>
+            <mat-chip [color]="getStatusColor()" selected>
+              {{ getStatusText() }}
+            </mat-chip>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Akcije samo za pending rezervacije -->
+    <div *ngIf="data.reservation.status === 'PENDING'" class="actions-section">
+      <h3>Akcije</h3>
+
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" (click)="acceptReservation()" [disabled]="showRejectForm">
+          <fa-icon [icon]="faCheck"></fa-icon>
+          Prihvati rezervaciju
+        </button>
+        <button mat-raised-button color="warn" (click)="showRejectForm = true" [disabled]="showRejectForm">
+          <fa-icon [icon]="faTimes"></fa-icon>
+          Odbij rezervaciju
+        </button>
+      </div>
+
+      <!-- Forma za odbijanje -->
+      <div *ngIf="showRejectForm" class="reject-form">
+        <form [formGroup]="rejectForm" (ngSubmit)="rejectReservation()">
+          <mat-form-field appearance="outline">
+            <mat-label>Razlog odbijanja</mat-label>
+            <textarea matInput formControlName="comment" rows="3"
+                      placeholder="Unesite razlog odbijanja rezervacije"></textarea>
+            <mat-error *ngIf="rejectForm.get('comment')?.invalid && rejectForm.get('comment')?.touched">
+              Razlog je obavezan
+            </mat-error>
+          </mat-form-field>
+
+          <div class="reject-buttons">
+            <button mat-button type="button" (click)="showRejectForm = false">
+              <fa-icon [icon]="faTimes"></fa-icon>
+              Otkaži
+            </button>
+            <button mat-raised-button color="warn" type="submit" [disabled]="rejectForm.invalid">
+              <fa-icon [icon]="faPaperPlane"></fa-icon>
+              Pošalji odbijenicu
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+      <fa-icon [icon]="faTimes"></fa-icon>
+      Zatvori
+    </button>
+  </mat-dialog-actions>
+</div>

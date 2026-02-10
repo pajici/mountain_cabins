@@ -1,0 +1,30 @@
+<div class="statistics-container">
+  <div class="stats-header">
+    <h1>Statistike i Analize</h1>
+    <button mat-raised-button color="primary" (click)="loadStatistics()">
+      <fa-icon [icon]="faSync"></fa-icon>
+      Osveži
+    </button>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <mat-card class="chart-card full-width">
+      <mat-card-header>
+        <mat-card-title>Broj rezervacija po mesecima za svaku vikendicu</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas #revenueChart></canvas>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="chart-card full-width">
+      <mat-card-header>
+        <mat-card-title>Odnos rezervacija: Vikend vs. Radni dan</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <canvas #performanceChart></canvas>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

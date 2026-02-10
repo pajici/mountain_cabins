@@ -1,0 +1,145 @@
+.calendar-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header h1 {
+  color: var(--mat-sys-primary);
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters mat-form-field {
+  min-width: 200px;
+}
+
+.calendar-wrapper {
+  background: var(--mat-sys-surface);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+.legend {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.legend-color.confirmed {
+  background-color: #4caf50; /* Green for ACCEPTED */
+}
+
+.legend-color.pending {
+  background-color: #ffc107; /* Yellow for PENDING */
+}
+
+.legend-color.cancelled {
+  background-color: #f44336; /* Red for CANCELLED/REJECTED */
+}
+
+/* FullCalendar custom styles */
+:host ::ng-deep .fc {
+  font-family: var(--mat-sys-body-large-font);
+}
+
+:host ::ng-deep .fc-header-toolbar {
+  margin-bottom: 1rem !important;
+}
+
+:host ::ng-deep .fc-button {
+  background-color: var(--mat-sys-primary) !important;
+  border-color: var(--mat-sys-primary) !important;
+  color: var(--mat-sys-on-primary) !important;
+}
+
+:host ::ng-deep .fc-button:hover {
+  background-color: var(--mat-sys-primary-container) !important;
+  border-color: var(--mat-sys-primary-container) !important;
+}
+
+:host ::ng-deep .fc-button:not(:disabled):active,
+:host ::ng-deep .fc-button-active {
+  background-color: var(--mat-sys-primary-container) !important;
+  border-color: var(--mat-sys-primary-container) !important;
+}
+
+:host ::ng-deep .fc-event {
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+  padding: 2px 4px;
+}
+
+:host ::ng-deep .fc-event.confirmed {
+  background-color: #4caf50 !important; /* Green for ACCEPTED */
+  color: white !important;
+  border-color: #4caf50 !important;
+}
+
+:host ::ng-deep .fc-event.pending {
+  background-color: #ffc107 !important; /* Yellow for PENDING */
+  color: black !important;
+  border-color: #ffc107 !important;
+}
+
+:host ::ng-deep .fc-event.cancelled {
+  background-color: #f44336 !important; /* Red for CANCELLED/REJECTED */
+  color: white !important;
+  border-color: #f44336 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+
+  .legend {
+    flex-direction: column;
+    align-items: center;
+  }
+}

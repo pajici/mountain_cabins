@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Rezultati Uvoza</h2>
+<mat-dialog-content>
+  <div class="import-summary">
+    <div class="summary-item success">
+      <mat-icon>check_circle</mat-icon>
+      <span>Uspešno uvezeno: {{ data.success.length }}</span>
+    </div>
+    <div class="summary-item failed">
+      <mat-icon>error</mat-icon>
+      <span>Greške: {{ data.failed.length }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="data.success.length > 0" class="results-section">
+    <h3>Uspešno uvezene vikendice:</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let cabin of data.success">
+        <mat-icon matListItemIcon class="success-icon">check</mat-icon>
+        <div matListItemTitle>{{ cabin.name }}</div>
+        <div matListItemLine>{{ cabin.place }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <div *ngIf="data.failed.length > 0" class="results-section">
+    <h3>Greške pri uvozu:</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let cabin of data.failed">
+        <mat-icon matListItemIcon class="error-icon">close</mat-icon>
+        <div matListItemTitle>{{ cabin.name || 'Nepoznato' }}</div>
+        <div matListItemLine>{{ cabin.place || 'Nepoznato mesto' }}</div>
+        <div matListItemLine class="error-message">{{ cabin.error }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="close()">U redu</button>
+</mat-dialog-actions>

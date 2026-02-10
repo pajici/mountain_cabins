@@ -1,0 +1,87 @@
+.cabins-management-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  color: var(--mat-sys-primary);
+  margin: 0;
+}
+
+.filter-section {
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: var(--mat-sys-surface);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cabins-table {
+  width: 100%;
+}
+
+.status-active {
+  color: var(--mat-sys-primary);
+  font-weight: 500;
+}
+
+.status-blocked {
+  color: var(--mat-sys-error);
+  font-weight: 500;
+}
+
+.status-inactive {
+  color: var(--mat-sys-outline);
+  font-weight: 500;
+}
+
+.status-maintenance {
+  color: var(--mat-sys-tertiary);
+  font-weight: 500;
+}
+
+.no-cabins {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-cabins-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: var(--mat-sys-outline);
+  margin-bottom: 1rem;
+}
+
+.no-cabins h2 {
+  color: var(--mat-sys-primary);
+  margin-bottom: 1rem;
+}
+
+.no-cabins p {
+  color: var(--mat-sys-secondary);
+  margin-bottom: 2rem;
+}
+
+/* Mat table responsive */
+@media (max-width: 768px) {
+  .cabins-table {
+    font-size: 0.875rem;
+  }
+
+  .mat-column-actions {
+    width: 120px;
+  }
+}

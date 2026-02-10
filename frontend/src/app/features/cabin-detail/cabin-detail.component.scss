@@ -1,0 +1,46 @@
+.cabin-detail {
+  padding: 20px;
+}
+
+.rating {
+  margin-bottom: 20px;
+  font-size: 1.2em;
+}
+
+.images {
+  margin-bottom: 20px;
+}
+
+.map {
+  margin-bottom: 20px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.detail-card {
+  padding: 1.5rem;
+  text-align: left;
+
+  h3 {
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+}
+
+.review {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

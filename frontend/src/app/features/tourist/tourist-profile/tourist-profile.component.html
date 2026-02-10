@@ -1,0 +1,107 @@
+<div class="profile-container">
+  <div class="header">
+    <h1>Moj Profil</h1>
+    <p>Upravljajte vašim ličnim podacima</p>
+  </div>
+
+  <div class="profile-content">
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>Lični podaci</mat-card-title>
+        <mat-card-subtitle>Ažurirajte vaše informacije</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="profileForm" class="profile-form">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Ime</mat-label>
+              <input matInput formControlName="firstName" placeholder="Unesite vaše ime">
+              <fa-icon [icon]="faUser" matSuffix></fa-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Prezime</mat-label>
+              <input matInput formControlName="lastName" placeholder="Unesite vaše prezime">
+              <fa-icon [icon]="faUser" matSuffix></fa-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="vas@email.com">
+              <fa-icon [icon]="faEnvelope" matSuffix></fa-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Telefon</mat-label>
+              <input matInput formControlName="phone" placeholder="+381 XX XXX XXX">
+              <fa-icon [icon]="faPhone" matSuffix></fa-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Adresa</mat-label>
+              <input matInput formControlName="address" placeholder="Ulica i broj">
+              <fa-icon [icon]="faHome" matSuffix></fa-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <div class="profile-image-section">
+              <label>Trenutna profilna slika:</label>
+              <img [src]="getProfileImage()" alt="Profilna slika" class="profile-image">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="file-upload">
+              <label for="profileImage">Nova profilna slika</label>
+              <input type="file" id="profileImage" accept="image/*" (change)="onFileSelected($event)">
+              <p *ngIf="selectedFile">Izabrana datoteka: {{ selectedFile.name }}</p>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-button (click)="resetForm()">
+          <fa-icon [icon]="faSync"></fa-icon>
+          Poništi
+        </button>
+        <button mat-button (click)="changePassword()">
+          <fa-icon [icon]="faLock"></fa-icon>
+          Promeni lozinku
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!profileForm.valid || (!profileForm.dirty && !selectedFile)"
+          (click)="saveProfile()">
+          <fa-icon [icon]="faSave"></fa-icon>
+          Sačuvaj promene
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Informacije o nalogu</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="account-info">
+          <div class="info-item">
+            <fa-icon [icon]="faUserCheck"></fa-icon>
+            <div>
+              <strong>Status naloga</strong>
+              <p>{{ profile?.active ? 'Aktivan' : 'Neaktivan' }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

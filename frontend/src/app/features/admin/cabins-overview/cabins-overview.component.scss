@@ -1,0 +1,143 @@
+.cabins-overview-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header h1 {
+  color: var(--mat-sys-primary);
+  margin: 0;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filters mat-form-field {
+  min-width: 200px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: var(--mat-sys-surface);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cabins-table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 150px;
+  text-align: center;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-value {
+  font-weight: 500;
+}
+
+.rating-star {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--mat-sys-primary);
+}
+
+.rating-star.warning {
+  color: var(--mat-sys-warn);
+}
+
+.rating-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating-cell .star-icon {
+  color: #ffc107;
+  font-size: 1.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.rating-cell .rating-value {
+  font-weight: 600;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.status-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.status-icon.active {
+  color: #4caf50;
+}
+
+.status-icon.blocked {
+  color: #f44336;
+}
+
+.no-cabins {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.no-cabins-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  color: var(--mat-sys-outline);
+  margin-bottom: 1rem;
+}
+
+.no-cabins h2 {
+  color: var(--mat-sys-primary);
+  margin-bottom: 1rem;
+}
+
+.no-cabins p {
+  color: var(--mat-sys-secondary);
+}
+
+/* Crvena boja za vikendice sa niskim ocenama */
+.low-rating-row {
+  background-color: rgba(244, 67, 54, 0.1) !important;
+}
+
+.low-rating-row:hover {
+  background-color: rgba(244, 67, 54, 0.15) !important;
+}
+
+/* Mat table responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PlaninskaVikendicaApplication<planinska-vikendica>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.matf.pzv.PlaninskaVikendicaApplication",
+            "projectName": "planinska-vikendica",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,121 @@
+<div class="dashboard-container">
+  <h1>Owner Dashboard</h1>
+
+  <!-- Statistike -->
+  <div class="stats-grid">
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <fa-icon class="stat-icon" [icon]="faHome"></fa-icon>
+          <div class="stat-text">
+            <h3>{{ stats.totalCabins }}</h3>
+            <p>Ukupno vikendica</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <fa-icon class="stat-icon" [icon]="faCalendarCheck"></fa-icon>
+          <div class="stat-text">
+            <h3>{{ stats.activeReservations }}</h3>
+            <p>Aktivne rezervacije</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <fa-icon class="stat-icon" [icon]="faDollarSign"></fa-icon>
+          <div class="stat-text">
+            <h3>{{ stats.monthlyRevenue | number:'1.0-0' }}</h3>
+            <p>Prihod ovog meseca (RSD)</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card">
+      <mat-card-content>
+        <div class="stat-content">
+          <fa-icon class="stat-icon" [icon]="faStar"></fa-icon>
+          <div class="stat-text">
+            <h3>{{ stats.averageRating | number:'1.1-1' }}</h3>
+            <p>Prosečna ocena</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Akcije -->
+  <div class="actions-grid">
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Moj Profil</mat-card-title>
+        <mat-card-subtitle>Upravljajte svojim ličnim podacima</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Ažurirajte svoje lične informacije, kontakt podatke i profilnu sliku.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/owner/profile">
+          <fa-icon [icon]="faUser"></fa-icon>
+          Uredi profil
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Upravljanje vikendicama</mat-card-title>
+        <mat-card-subtitle>Dodajte, izmenite ili obrišite svoje vikendice</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Upravljajte svojim portfolio vikendica, dodajte fotografije i ažurirajte informacije.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/owner/cabins">
+          <fa-icon [icon]="faCog"></fa-icon>
+          Upravljaj vikendicama
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Kalendar rezervacija</mat-card-title>
+        <mat-card-subtitle>Pregledajte sve rezervacije na kalendaru</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Vizuelni pregled svih rezervacija za vaše vikendice sa mogućnošću upravljanja.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/owner/calendar">
+          <fa-icon [icon]="faCalendarAlt"></fa-icon>
+          Otvori kalendar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Statistike i analize</mat-card-title>
+        <mat-card-subtitle>Detailed insights o vašem poslovanju</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Pregledajte prihode, popunjenost i trendove rezervacija kroz vreme.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/owner/statistics">
+          <fa-icon [icon]="faChartLine"></fa-icon>
+          Prikaži statistike
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+.booking-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--mat-sys-primary);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row mat-form-field {
+  flex: 1;
+}
+
+.search-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+}
+
+.cabins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cabin-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cabin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cabin-card.selected {
+  border: 2px solid var(--mat-sys-primary);
+  background-color: var(--mat-sys-primary-container);
+}
+
+.no-cabins {
+  text-align: center;
+  padding: 3rem;
+  color: var(--mat-sys-outline);
+}
+
+.no-cabins fa-icon {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.confirmation-details h3 {
+  margin-top: 0;
+  color: var(--mat-sys-primary);
+}
+
+.confirmation-details p {
+  margin: 0.5rem 0;
+}
+
+.stepper-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--mat-sys-outline-variant);
+}

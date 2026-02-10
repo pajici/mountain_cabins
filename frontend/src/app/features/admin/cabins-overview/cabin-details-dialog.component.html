@@ -1,0 +1,106 @@
+<div class="cabin-details-dialog">
+  <div class="dialog-header" [class.blocked]="data.status === 'BLOCKED'">
+    <h2 mat-dialog-title>
+      <fa-icon [icon]="faCheckCircle" *ngIf="data.status === 'ACTIVE'" class="status-icon active"></fa-icon>
+      <fa-icon [icon]="faBan" *ngIf="data.status === 'BLOCKED'" class="status-icon blocked"></fa-icon>
+      {{ data.name }}
+    </h2>
+    <button mat-icon-button mat-dialog-close class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content>
+    <div class="details-grid">
+      <div class="detail-item">
+        <div class="detail-icon">
+          <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
+        </div>
+        <div class="detail-content">
+          <label>Lokacija</label>
+          <span>{{ data.place }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <fa-icon [icon]="faUser"></fa-icon>
+        </div>
+        <div class="detail-content">
+          <label>Vlasnik</label>
+          <span>{{ data.ownerName || 'Nepoznato' }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item" *ngIf="data.phone">
+        <div class="detail-icon">
+          <fa-icon [icon]="faPhone"></fa-icon>
+        </div>
+        <div class="detail-content">
+          <label>Telefon</label>
+          <span>{{ data.phone }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <fa-icon [icon]="faMoneyBillWave"></fa-icon>
+        </div>
+        <div class="detail-content">
+          <label>Cena (leto)</label>
+          <span class="price">{{ data.priceSummerRsd }} RSD</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <fa-icon [icon]="faMoneyBillWave"></fa-icon>
+        </div>
+        <div class="detail-content">
+          <label>Cena (zima)</label>
+          <span class="price">{{ data.priceWinterRsd }} RSD</span>
+        </div>
+      </div>
+
+      <div class="detail-item">
+        <div class="detail-icon">
+          <mat-icon>info</mat-icon>
+        </div>
+        <div class="detail-content">
+          <label>Status</label>
+          <span [class.status-active]="data.status === 'ACTIVE'" 
+                [class.status-blocked]="data.status === 'BLOCKED'">
+            {{ data.status === 'ACTIVE' ? 'Aktivna' : 'Blokirana' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="detail-item full-width" *ngIf="data.blockedUntil && data.status === 'BLOCKED'">
+        <div class="detail-icon">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="detail-content">
+          <label>Blokirana do</label>
+          <span>{{ data.blockedUntil | date:'dd.MM.yyyy HH:mm' }}</span>
+        </div>
+      </div>
+
+      <div class="detail-item full-width" *ngIf="averageRating !== undefined">
+        <div class="detail-icon">
+          <fa-icon [icon]="faStar"></fa-icon>
+        </div>
+        <div class="detail-content">
+          <label>Prosečna ocena</label>
+          <div class="rating-display">
+            <span class="rating-value">{{ averageRating | number:'1.1-1' }}</span>
+            <fa-icon [icon]="faStar" class="star-icon" *ngFor="let star of getStars(averageRating)"></fa-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Zatvori</button>
+  </mat-dialog-actions>
+</div>

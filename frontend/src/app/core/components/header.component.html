@@ -1,0 +1,28 @@
+<header class="header">
+  <div class="container">
+    <button *ngIf="isCabinDetail" (click)="goBack()" class="back-btn">← Back</button>
+    <div class="logo">
+      <a routerLink="/cabins">
+        <img src="/assets/images/planinska_vikendica_logo.png" alt="Planinska Vikendica Logo" class="logo-image" />
+        Planinska Vikendica
+      </a>
+    </div>
+    <nav class="nav" [class.nav-open]="isMenuOpen">
+      <a routerLink="/cabins" (click)="closeMenu()">Vikendice</a>
+      <a *ngIf="authService.isLoggedIn() && authService.hasRole('TOURIST')" routerLink="/tourist/profile" (click)="closeMenu()">Profil</a>
+      <a *ngIf="authService.isLoggedIn() && authService.hasRole('TOURIST')" routerLink="/tourist/reservations" (click)="closeMenu()">Rezervacije</a>
+      <a *ngIf="authService.isLoggedIn() && authService.hasRole('OWNER')" routerLink="/owner/profile" (click)="closeMenu()">Profil</a>
+      <a *ngIf="authService.isLoggedIn() && authService.hasRole('OWNER')" routerLink="/owner" (click)="closeMenu()">Moje Vikendice</a>
+      <a *ngIf="authService.isLoggedIn() && authService.hasRole('ADMIN')" routerLink="/admin/profile" (click)="closeMenu()">Profil</a>
+      <a *ngIf="authService.isLoggedIn() && authService.hasRole('ADMIN')" routerLink="/admin" (click)="closeMenu()">Admin Panel</a>
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/login" (click)="closeMenu()">Prijava</a>
+      <a *ngIf="!authService.isLoggedIn()" routerLink="/register" (click)="closeMenu()">Registracija</a>
+      <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout-btn">Odjava</button>
+    </nav>
+    <button class="hamburger" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>

@@ -1,0 +1,75 @@
+<div class="reservations-container">
+  <h1>Moje Rezervacije</h1>
+
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Aktivne rezervacije">
+      <div class="reservations-grid" *ngIf="currentReservations.length > 0; else noCurrentReservations">
+        <mat-card class="reservation-card" *ngFor="let reservation of currentReservations">
+          <mat-card-header>
+            <mat-card-title>{{ reservation.cabinName }}</mat-card-title>
+            <mat-card-subtitle>{{ reservation.cabinLocation }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="reservation-details">
+              <p><strong>Period:</strong> {{ reservation.startDate | date:'dd.MM.yyyy' }} - {{ reservation.endDate | date:'dd.MM.yyyy' }}</p>
+              <p><strong>Broj gostiju:</strong> {{ reservation.adults + reservation.children }}</p>
+              <p><strong>Ukupna cena:</strong> {{ reservation.totalPriceRsd | number:'1.2-2' }} RSD</p>
+              <p><strong>Status:</strong> <span [class]="'status-' + reservation.status.toLowerCase()">{{ getStatusText(reservation.status) }}</span></p>
+              <p *ngIf="reservation.touristNote"><strong>Vaša napomena:</strong> {{ reservation.touristNote }}</p>
+              <p *ngIf="reservation.ownerComment"><strong>Komentar vlasnika:</strong> {{ reservation.ownerComment }}</p>
+            </div>
+          </mat-card-content>
+          <mat-card-actions *ngIf="canCancel(reservation)">
+            <button mat-raised-button color="warn" (click)="cancelReservation(reservation)">
+              <fa-icon [icon]="faTimes"></fa-icon>
+              Otkaži Rezervaciju
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <ng-template #noCurrentReservations>
+        <div class="no-reservations">
+          <fa-icon [icon]="faCalendarAlt" class="no-reservations-icon"></fa-icon>
+          <h2>Nemate aktivnih rezervacija</h2>
+          <p>Možete pretraživati vikendice i kreirati rezervacije preko početne strane.</p>
+        </div>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Arhiva">
+      <div class="reservations-grid" *ngIf="archiveReservations.length > 0; else noArchiveReservations">
+        <mat-card class="reservation-card" *ngFor="let reservation of archiveReservations">
+          <mat-card-header>
+            <mat-card-title>{{ reservation.cabinName }}</mat-card-title>
+            <mat-card-subtitle>{{ reservation.cabinLocation }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="reservation-details">
+              <p><strong>Period:</strong> {{ reservation.startDate | date:'dd.MM.yyyy' }} - {{ reservation.endDate | date:'dd.MM.yyyy' }}</p>
+              <p><strong>Broj gostiju:</strong> {{ reservation.adults + reservation.children }}</p>
+              <p><strong>Ukupna cena:</strong> {{ reservation.totalPriceRsd | number:'1.2-2' }} RSD</p>
+              <p><strong>Status:</strong> <span [class]="'status-' + reservation.status.toLowerCase()">{{ getStatusText(reservation.status) }}</span></p>
+              <p *ngIf="reservation.touristNote"><strong>Vaša napomena:</strong> {{ reservation.touristNote }}</p>
+              <p *ngIf="reservation.ownerComment"><strong>Komentar vlasnika:</strong> {{ reservation.ownerComment }}</p>
+            </div>
+          </mat-card-content>
+          <mat-card-actions *ngIf="canReview(reservation)">
+            <button mat-button color="primary" (click)="leaveReview(reservation)">
+              <fa-icon [icon]="faStar"></fa-icon>
+              Ostavi recenziju
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <ng-template #noArchiveReservations>
+        <div class="no-reservations">
+          <fa-icon [icon]="faHistory" class="no-reservations-icon"></fa-icon>
+          <h2>Nemate arhiviranih rezervacija</h2>
+          <p>Vaše završene rezervacije će se pojaviti ovde.</p>
+        </div>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

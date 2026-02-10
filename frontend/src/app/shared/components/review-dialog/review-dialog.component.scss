@@ -1,0 +1,74 @@
+.review-dialog {
+  min-width: 500px;
+}
+
+.reservation-info {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--mat-sys-surface-container-low);
+  border-radius: 8px;
+}
+
+.reservation-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--mat-sys-primary);
+}
+
+.reservation-info p {
+  margin: 0.25rem 0;
+  color: var(--mat-sys-secondary);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rating-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rating-section label {
+  font-weight: 500;
+  color: var(--mat-sys-primary);
+}
+
+.rating-stars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.rating-stars fa-icon {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.rating-stars fa-icon.filled {
+  color: #ffd700;
+}
+
+.rating-stars fa-icon:hover {
+  color: #ffd700;
+}
+
+.comment-field {
+  width: 100%;
+}
+
+.comment-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+mat-dialog-actions {
+  padding: 1rem 0 0 0;
+}
+
+mat-dialog-actions button {
+  margin-left: 0.5rem;
+}

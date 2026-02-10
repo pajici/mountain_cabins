@@ -1,0 +1,129 @@
+<div class="dashboard-container">
+  <h1>Admin Dashboard</h1>
+
+  <!-- KPI sekcija -->
+  <div class="kpi-grid grid grid-2 grid-3 grid-4">
+    <mat-card class="kpi-card">
+      <mat-card-content>
+        <div class="kpi-content">
+          <fa-icon class="kpi-icon" [icon]="faUsers"></fa-icon>
+          <div class="kpi-text">
+            <h3>{{ kpiData.totalUsers }}</h3>
+            <p>Ukupno korisnika</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-content>
+        <div class="kpi-content">
+          <fa-icon class="kpi-icon" [icon]="faHome"></fa-icon>
+          <div class="kpi-text">
+            <h3>{{ kpiData.totalCabins }}</h3>
+            <p>Ukupno vikendica</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-content>
+        <div class="kpi-content">
+          <fa-icon class="kpi-icon" [icon]="faCalendarCheck"></fa-icon>
+          <div class="kpi-text">
+            <h3>{{ kpiData.totalReservations }}</h3>
+            <p>Ukupno rezervacija</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-content>
+        <div class="kpi-content">
+          <fa-icon class="kpi-icon" [icon]="faClock"></fa-icon>
+          <div class="kpi-text">
+            <h3>{{ kpiData.pendingRegistrations }}</h3>
+            <p>Čeka na odobrenje</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-content>
+        <div class="kpi-content">
+          <fa-icon class="kpi-icon" [icon]="faDollarSign"></fa-icon>
+          <div class="kpi-text">
+            <h3>{{ kpiData.monthlyRevenue | number:'1.0-0' }}</h3>
+            <p>Prihod ovog meseca (RSD)</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card">
+      <mat-card-content>
+        <div class="kpi-content">
+          <fa-icon class="kpi-icon" [icon]="faCheckCircle"></fa-icon>
+          <div class="kpi-text">
+            <h3>{{ kpiData.activeCabins }}</h3>
+            <p>Aktivne vikendice</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Akcije -->
+  <div class="actions-grid grid grid-2 grid-3">
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Upravljanje korisnicima</mat-card-title>
+        <mat-card-subtitle>Pregled i upravljanje svim korisnicima sistema</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Upravljajte korisničkim nalozima, menjajte uloge i deaktivirajte naloge.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/admin/users">
+          <fa-icon [icon]="faUserCog"></fa-icon>
+          Upravljaj korisnicima
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Registracije</mat-card-title>
+        <mat-card-subtitle>Odobravanje novih registracija</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Pregledajte i odobrite nove registracije korisnika i vlasnika.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/admin/registrations">
+          <fa-icon [icon]="faUserCheck"></fa-icon>
+          Pregled registracija
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="action-card">
+      <mat-card-header>
+        <mat-card-title>Pregled vikendica</mat-card-title>
+        <mat-card-subtitle>Monitoring svih vikendica u sistemu</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Pregledajte sve vikendice, njihove statuse i mogućnosti moderiranja.</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" routerLink="/admin/cabins">
+          <fa-icon [icon]="faBuilding"></fa-icon>
+          Pregled vikendica
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
